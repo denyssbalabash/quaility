@@ -78,13 +78,7 @@ main{min-height:100%;max-width:420px;margin:0 auto;display:flex;flex-direction:c
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
 <script>
-const VCARD=["BEGIN:VCARD","VERSION:3.0",
-  "N:Balabash;Valentyn;;;","FN:Valentyn Balabash",
-  "ORG:Quaility","TITLE:Founder & CEO",
-  "TEL;TYPE=CELL:+380730537357",
-  "EMAIL;TYPE=WORK:quaility.co@gmail.com",
-  "ADR;TYPE=WORK:;;;Odesa;;;Ukraine",
-  "END:VCARD"].join("\r\n");
+const VCARD="https://denyssbalabash.github.io/quaility/vb.vcf";
 const Q={
   contact:{d:VCARD,h:"Scan to save the contact"},
   wa:{d:"https://wa.me/380730537357",h:"Scan to start a WhatsApp chat"}
@@ -95,7 +89,7 @@ function draw(k){
   const box=document.getElementById("qr");box.setAttribute("aria-label",Q[k].h);
   if(!window.qrcode)return;
   try{qrcode.stringToBytes=qrcode.stringToBytesFuncs["UTF-8"]}catch(e){}
-  const c=qrcode(0,"M");c.addData(Q[k].d,"Byte");c.make();
+  const c=qrcode(0,"L");c.addData(Q[k].d,"Byte");c.make();
   const n=c.getModuleCount();let p="";
   for(let r=0;r<n;r++)for(let x=0;x<n;x++)if(c.isDark(r,x))p+=`M${x} ${r}h1v1h-1z`;
   box.innerHTML=`<svg viewBox="0 0 ${n} ${n}" shape-rendering="crispEdges"><path d="${p}" fill="#1f3f1f"/></svg>`;
